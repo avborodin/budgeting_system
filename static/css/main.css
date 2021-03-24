@@ -1,0 +1,22 @@
+.table .thead-yellow th {
+    background-color: #fdf001;
+    color: #333333;
+}
+.tbody-white td, .tbody-white th {
+	background-color: #fff;
+    color: #333333;
+} 
+.alert-success {
+	background-color: #eeffea;
+}
+.btn-black, .btn-black:hover {
+	background-color: #000;
+	color: #fdf001;
+	border-color: #fdf001;
+}
+.alert-border-gray {
+	border-color: #23222252;
+}
+.required {
+	color:red;
+}
