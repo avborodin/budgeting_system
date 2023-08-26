@@ -11,8 +11,11 @@ from django.contrib.auth.decorators import login_required
 from counterparty.forms import CounterpartyForm, BankDetailsForm
 from counterparty.models import Counterparty, BankDetails, Group
 from django.contrib.auth import authenticate, login, logout
+from django.http import JsonResponse
 
 #from django.views.decorators.csrf import csrf_exempt
+def is_ajax(request):
+	return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
 # Create your views here.
 @login_required(login_url="/login_user/")
@@ -57,6 +60,7 @@ def index(request):
 		'counterparties':counterparties,
 		'page_obj':page_obj,
 	}
+	print(settings.STATIC_ROOT)
 	return render(request, "index.html", context)
 
 def LoginUser(request):
@@ -82,7 +86,7 @@ def form_create(request):
 	is_btn_save = '0';
 	html = '';
 	
-	if request.is_ajax():
+	if is_ajax(request=request):
 		if request.method == 'POST' and request.POST.get('is_btn_save') == '1':
 			is_btn_save = '1';
 			counterparty_form = CounterpartyForm(request.POST, prefix='counterparty')
@@ -114,7 +118,7 @@ def form_create(request):
 				data_bankdetails.correspondent_account = bankdetails_form.cleaned_data['correspondent_account'];
 				data_bankdetails.checking_account = bankdetails_form.cleaned_data['checking_account'];
 				data_bankdetails.account_type = bankdetails_form.cleaned_data['account_type'];
-				data_bankdetails.current = bankdetails_form.cleaned_data['current'];			
+				data_bankdetails.currency = bankdetails_form.cleaned_data['currency'];			
 				data_bankdetails.save()
 				return HttpResponse("1");
 		else:
@@ -128,8 +132,9 @@ def form_create(request):
 			'bankdetails_form':bankdetails_form,
 			'action_name':'form_create',
 			'is_btn_save':is_btn_save,
+            'counterparty_id':'',
 		}
-		html = render_to_string("form.html", context)
+		html = render_to_string("form.html", context, request=request)
 
 	return HttpResponse(html)
 	#return render(request,"form.html",context)
@@ -140,7 +145,7 @@ def form_edit(request, counterparty_id):
 		raise PermissionDenied
 	
 	html = ''
-	if request.is_ajax():
+	if is_ajax(request=request):
 		if request.method == 'POST' and request.POST.get('is_btn_save') == '1':
 			counterparty_form = CounterpartyForm(request.POST, prefix='counterparty')
 			bankdetails_form = BankDetailsForm(request.POST, prefix='bankdetails')
@@ -169,7 +174,7 @@ def form_edit(request, counterparty_id):
 				data_bankdetails.correspondent_account = bankdetails_form.cleaned_data['correspondent_account'];
 				data_bankdetails.checking_account = bankdetails_form.cleaned_data['checking_account'];
 				data_bankdetails.account_type = bankdetails_form.cleaned_data['account_type'];
-				data_bankdetails.current = bankdetails_form.cleaned_data['current'];			
+				data_bankdetails.currency = bankdetails_form.cleaned_data['currency'];			
 				data_bankdetails.save()
 				return HttpResponse("1");
 		else:
@@ -180,10 +185,11 @@ def form_edit(request, counterparty_id):
 			'counterparty_form':counterparty_form,
 			'bankdetails_form':bankdetails_form,
 			'action_name':'form_edit'+'/'+str(counterparty_obj.id),
+            'counterparty_id': counterparty_obj.id,
 		}
 
 		#return render(request,"form.html",context)
-		html = render_to_string("form.html", context)
+		html = render_to_string("form.html", context, request=request)
 
 	return HttpResponse(html)
 
@@ -213,6 +219,10 @@ def send_mail_with_file(request):
 	email.send()
 
 	return HttpResponse("Sent");
+
+def getCounterparties(request):
+	counterparties = Counterparty.objects.all();
+	return JsonResponse({'counterparties':list(counterparties.values())});
 
 def test(request):
 	msg = EmailMessage('hhhhh', 'csadasd', '', [''])

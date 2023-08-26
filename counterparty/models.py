@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from currency.models import Currency 
 
 class Group(models.Model):
 	name = models.CharField(max_length=128)
@@ -59,17 +60,8 @@ class Counterparty(models.Model):
 	class Meta:    
 		verbose_name = "контрагент"
 		verbose_name_plural = "Контрагенты"
+		ordering = ['id']
 
-class Currency(models.Model):
-	name = models.CharField(max_length=3)
-	code = models.IntegerField(default=0)
-
-	def __str__(self):
-		return self.name
-	
-	class Meta:    
-		verbose_name = "валюту "
-		verbose_name_plural = "Валюта"
 
 class AccountType(models.Model):
 	name = models.CharField(max_length=128)
@@ -82,13 +74,13 @@ class AccountType(models.Model):
 		verbose_name_plural = "Типа счета"
 
 class BankDetails(models.Model):
-	counterparty  = models.OneToOneField(Counterparty, on_delete=models.CASCADE) #many to one relation with Group
+	counterparty = models.OneToOneField(Counterparty, on_delete=models.CASCADE) #many to one relation with Group
 	bank_name = models.CharField(max_length=128, verbose_name='Наименование банка') 	
 	bik = models.CharField(max_length=9, verbose_name='БИК')
 	correspondent_account = models.CharField(max_length=20, verbose_name='Корр. Счет') 
 	checking_account = models.CharField(max_length=20, verbose_name='Расчетный счет')
 	account_type = models.ForeignKey(AccountType, on_delete=models.CASCADE, verbose_name='Вид счета')
-	current = models.ForeignKey(Currency, on_delete=models.CASCADE, verbose_name='Валюта счета')
+	currency = models.ForeignKey(Currency, on_delete=models.CASCADE, verbose_name='Валюта счета', null=True)
 	create_at = models.DateTimeField(auto_now_add=True)
 	update_at = models.DateTimeField(auto_now=True)
 
@@ -105,3 +97,14 @@ class BankInfo(models.Model):
 	class Meta:    
 		verbose_name = "инфо о банке"
 		verbose_name_plural = "Инфо о банках"
+
+class SignatoryContract(models.Model):
+	counterparty = models.OneToOneField(Counterparty, on_delete=models.CASCADE)
+	fio_i = models.CharField(max_length=128, verbose_name='ФИО в именительном падеже')
+	fio_r = models.CharField(max_length=128, verbose_name='ФИО в родительном падеже')
+	post_i = models.CharField(max_length=128, verbose_name='Должность в именительном падеже')
+	post_r = models.CharField(max_length=128, verbose_name='Должность в родительном падеже')
+	document = models.CharField(max_length=128, verbose_name='Документ - основание в родительном падеже')
+
+#class ContactFaces(models.Model):
+	

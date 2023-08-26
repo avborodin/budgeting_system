@@ -19,7 +19,8 @@ class CounterpartyForm(ModelForm):
 			#'phone'     : TextInput(attrs={'class': 'input','placeholder':'phone'}),
 			#'address'   : TextInput(attrs={'class': 'input','placeholder':'address'}),
 			#'user':forms.CharField(widget=forms.HiddenInput()),
-			'group':forms.Select(attrs={'class': 'form-control mr-sm-2'}),
+			'id':forms.TextInput(attrs={'class':'form-control mr-sm-2','readonly':'readonly'}),
+            'group':forms.Select(attrs={'class': 'form-control mr-sm-2'}),
 			'name':forms.TextInput(attrs={'class':'form-control mr-sm-2','placeholder':'Наименование'}),
 			'opf':forms.Select(attrs={'class': 'form-control mr-sm-2'}),
 			'short_name':forms.TextInput(attrs={'class':'form-control mr-sm-2','placeholder':'Сокрашенное наименование'}),
@@ -41,7 +42,7 @@ class BankDetailsForm(ModelForm):
 		model = BankDetails
 		fields = [
 			'bank_name','bik','correspondent_account',
-			'checking_account','account_type','current'
+			'checking_account','account_type','currency'
 		]
 
 		widgets = {
@@ -50,5 +51,5 @@ class BankDetailsForm(ModelForm):
 			'correspondent_account':forms.TextInput(attrs={'class':'form-control mr-sm-2','placeholder':'Корр. Счет'}),
 			'checking_account':forms.TextInput(attrs={'class':'form-control mr-sm-2','placeholder':'Расчетный cчет'}),
 			'account_type':forms.Select(attrs={'class': 'form-control mr-sm-2'}),
-			'current':forms.Select(attrs={'class': 'form-control mr-sm-2'}),
+			'currency':forms.Select(attrs={'class': 'form-control mr-sm-2'}),
 		}

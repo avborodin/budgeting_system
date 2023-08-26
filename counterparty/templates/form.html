@@ -10,7 +10,7 @@
 				<label for="email" class="mr-sm-2">№ контрагента:</label>
 			</div>
 			<div class="col-2">
-				<input type="text" readonly="" class="form-control mr-sm-2" id="id">
+                <input type="text" readonly="" class="form-control mr-sm-2" id="id" value="{{ counterparty_id }}">
 			</div>
 			<div class="col-1">
 				<label for="1c" class="mr-sm-2">№ 1С:</label>
@@ -41,7 +41,7 @@
 			<div class="col-7">
         {{ counterparty_form.name }}
         <div class="invalid-feedback"{% if counterparty_form.name.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-          Выберите наименование.
+          Введите наименование.
         </div>
       </div>
 			<div class="col-1">
@@ -67,7 +67,7 @@
 			<div class="col-10">
         {{ counterparty_form.short_name }}
         <div class="invalid-feedback"{% if counterparty_form.short_name.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-          Выберите сокрашенное наименование.
+          Введите сокрашенное наименование.
         </div>
 			</div>
 		</div>
@@ -83,7 +83,7 @@
 			<div class="col-10">
         {{ counterparty_form.full_name }}
         <div class="invalid-feedback"{% if counterparty_form.full_name.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-          Выберите полное наименование.
+          Введите полное наименование.
         </div>
       </div>
 		</div>
@@ -230,12 +230,12 @@
       <div class="col-2">
         <div class="form-check-inline">
           <span class="required">*</span>&nbsp;
-          <label for="current" class="mr-sm-2">Валюта счета:</label>
+          <label for="currency" class="mr-sm-2">Валюта счета:</label>
         </div>
       </div>
       <div class="col-2">
-        {{ bankdetails_form.current }}
-        <div class="invalid-feedback"{% if bankdetails_form.current.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
+        {{ bankdetails_form.currency }}
+        <div class="invalid-feedback"{% if bankdetails_form.currency.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
           Выберите валюту.
         </div>
       </div>
@@ -244,17 +244,17 @@
 </form>
 <script type="text/javascript">
 $(document).ready(function () {
-  var is_btn_save = $('input[name=is_btn_save]').val();
+    var is_btn_save = $('input[name=is_btn_save]').val();
   
-  if(is_btn_save==1){
-    $('form').find('input,select').each(function() {
-      if($(this).prop('required')){
-        if($(this).val() == ''){
-          $(this).addClass('is-invalid');
-        }
-      }
-    });
-  }
+    if(is_btn_save==1){
+        $('form').find('input,select').each(function() {
+            if($(this).prop('required')){
+                if($(this).val() == ''){
+                    $(this).addClass('is-invalid');
+                }
+            }
+        });
+    }
   $('form').find('input,select').change(function(){
     if($(this).prop('required')){
       if($(this).val()){

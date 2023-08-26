@@ -74,7 +74,7 @@
           </td>
           <td>{{ counterparty.id }}</td>
           <td>{{ counterparty.user.last_name }} {{ counterparty.user.first_name }}</td>
-          <td>{{ counterparty.short_name }}</td>
+          <td><a href="javascript:void(0);" class="openModal" data-link="/counterparty/form_edit/{{ counterparty.id }}">{{ counterparty.short_name }}</a></td>
           <td>{{ counterparty.group.name }}</td>
           <td>{{ counterparty.inn }}</td>
           <td>{{ counterparty.kpp }}</td>

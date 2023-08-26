@@ -1,7 +1,7 @@
 from django.contrib import admin
-from counterparty.models import Group, Opf, Currency, AccountType, Counterparty, BankDetails, BankInfo
-
-admin.site.site_header = "Администрирование"
+from counterparty.models import Group, Opf, AccountType, Counterparty, BankDetails, BankInfo
+#from currency.models import Currency
+admin.site.site_header = "Администрирование Expo Fusion"
 
 # Register your models here.
 
@@ -29,7 +29,7 @@ class CounterpartyAdmin(admin.ModelAdmin):
 
 admin.site.register(Group)
 admin.site.register(Opf)
-admin.site.register(Currency)
+#admin.site.register(Currency)
 admin.site.register(AccountType)
 admin.site.register(Counterparty, CounterpartyAdmin)
 admin.site.register(BankDetails)
