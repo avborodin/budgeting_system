@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'backend/base.html' %}
 
 {% block create_new %}
   <div class="container-fluid p-2 bg-secondary text-white">
@@ -22,11 +22,11 @@
       <div class="row"> 
         <div class="col-2"> 
         <div class="form-group">
-          <label>Наименование:</label>
+          <label for="search-name">Наименование:</label>
            <input type="text" class="form-control" placeholder="Наименование" value="{{request.GET.name}}" name="name">
         </div>
         <div class="form-group">
-          <label>Группа:</label>
+          <label for="search-group">Группа:</label>
           <select class="form-control" name="group">
             <option value="">---------</option>
             {% for group in groups %}
@@ -37,11 +37,11 @@
       </div>
       <div class="col-2"> 
         <div class="form-group">
-          <label>ИНН:</label>
+          <label for="search-inn">ИНН:</label>
           <input type="text" class="form-control" placeholder="ИНН" value="{{request.GET.inn}}" name="inn">
         </div>
         <div class="form-group">
-          <label>КПП:</label>
+          <label for="search-kpp">КПП:</label>
           <input type="text" class="form-control" placeholder="КПП" value="{{request.GET.kpp}}" name="kpp">
         </div>
       </div>

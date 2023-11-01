@@ -9,8 +9,7 @@ from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from counterparty.forms import CounterpartyForm, BankDetailsForm
-from counterparty.models import Counterparty, BankDetails, Group
-from django.contrib.auth import authenticate, login, logout
+from counterparty.models import Counterparty, BankDetails, Group, Opf
 from django.http import JsonResponse
 
 #from django.views.decorators.csrf import csrf_exempt
@@ -60,26 +59,7 @@ def index(request):
 		'counterparties':counterparties,
 		'page_obj':page_obj,
 	}
-	print(settings.STATIC_ROOT)
 	return render(request, "index.html", context)
-
-def LoginUser(request):
-
-	if request.method == 'POST': 
-		username = request.POST.get("login","")
-		password = request.POST.get('password',"")
-		user = authenticate(username=username, password=password)
-		
-		if user is not None:
-			login(request, user)
-			return redirect("/")
-		else:	
-			return redirect("/login_user")        
-	
-	if request.user.is_authenticated:
-		return redirect("/")
-
-	return render(request,"login.html")
 
 def form_create(request):
 	#request.is_ajax and
@@ -193,10 +173,6 @@ def form_edit(request, counterparty_id):
 
 	return HttpResponse(html)
 
-def logout_user(request):
-	logout(request)
-	return redirect("/")
-
 @login_required(login_url="/login_user/")
 def delete(request, counterparty_id):
 	counterparty_obj = get_object_or_404(Counterparty, pk=counterparty_id)
@@ -221,8 +197,17 @@ def send_mail_with_file(request):
 	return HttpResponse("Sent");
 
 def getCounterparties(request):
-	counterparties = Counterparty.objects.all();
+	counterparties = Counterparty.objects.all()
 	return JsonResponse({'counterparties':list(counterparties.values())});
+
+def getOpf(request):
+    if is_ajax(request=request):
+        if request.method == 'POST':
+            opf_id = request.POST['opf_id']
+            opf = Opf.objects.get(pk=opf_id)
+            return JsonResponse({'name':opf.name, 'full_name':opf.full_name});
+    else:
+        return JsonResponse({'error':'sorry'});
 
 def test(request):
 	msg = EmailMessage('hhhhh', 'csadasd', '', [''])

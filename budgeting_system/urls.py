@@ -21,7 +21,8 @@ from django.views.static import serve
 
 urlpatterns = [
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
-	path('', include('counterparty.urls')),
-	path('counterparty/', include('counterparty.urls')),
+    path("", include("common.urls", namespace="common")),
+	#path('', include('counterparty.urls')),
+	path('counterparty/', include('counterparty.urls', namespace="counterparty")),
     path('admin/', admin.site.urls),
 ]

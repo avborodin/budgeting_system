@@ -3,258 +3,32 @@
   <input type="hidden"  id="form_id" value="form_contragent_id">
   <input type="hidden" name="is_btn_save" value="{{is_btn_save}}">
   {{ counterparty_form.user.as_hidden }}
-  <div class="alert alert-border-gray">
-		<p><strong>Идентификационные данные</strong></p>
-		<div class="form-group row">
-			<div class="col-2">
-				<label for="email" class="mr-sm-2">№ контрагента:</label>
-			</div>
-			<div class="col-2">
-                <input type="text" readonly="" class="form-control mr-sm-2" id="id" value="{{ counterparty_id }}">
-			</div>
-			<div class="col-1">
-				<label for="1c" class="mr-sm-2">№ 1С:</label>
-			</div>
-			<div class="col-2">
-				<input type="text" readonly class="form-control mr-sm-2" id="1c">
-			</div>
-			<div class="col-1">
-        <div class="form-check-inline">
-          <span class="required">*</span>&nbsp; 
-				  <label for="group" class="mr-sm-2">Группа:</label>
-        </div>
-			</div>
-			<div class="col-4">
-        {{ counterparty_form.group }}
-        <div class="invalid-feedback"{% if counterparty_form.group.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-          Выберите группу.
-        </div>    
-			</div>
-		</div>
-		<div class="form-group row">
-			<div class="col-2">
-        <div class="form-check-inline">
-          <span class="required">*</span>&nbsp;
-				  <label for="name" class="mr-sm-2">Наименование:</label>
-        </div>
-			</div>
-			<div class="col-7">
-        {{ counterparty_form.name }}
-        <div class="invalid-feedback"{% if counterparty_form.name.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-          Введите наименование.
-        </div>
-      </div>
-			<div class="col-1">
-        <div class="form-check-inline">
-          <span class="required">*</span>&nbsp;
-				  <label for="opf" class="mr-sm-2">ОПФ:</label>
-        </div>
-			</div>
-			<div class="col-2">
-        {{ counterparty_form.opf }}
-        <div class="invalid-feedback"{% if counterparty_form.opf.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-          Выберите ОПФ.
-        </div>
-			</div>
-		</div>
-		<div class="form-group row">
-			<div class="col-2">
-        <div class="form-check-inline">
-          <span class="required">*</span>&nbsp;
-          <label for="short_name" class="mr-sm-2">Сокр. наименование:</label>
-        </div>
-      </div>
-			<div class="col-10">
-        {{ counterparty_form.short_name }}
-        <div class="invalid-feedback"{% if counterparty_form.short_name.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-          Введите сокрашенное наименование.
-        </div>
-			</div>
-		</div>
-  	<div class="form-group row">
-			<div class="col-2">
-        <div class="form-check-inline">
-          <span class="required">*</span>&nbsp;
-          <label for="full_name" class="mr-sm-2">
-            Полн. наименование:
-          </label>
-        </div>
-      </div>
-			<div class="col-10">
-        {{ counterparty_form.full_name }}
-        <div class="invalid-feedback"{% if counterparty_form.full_name.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-          Введите полное наименование.
-        </div>
-      </div>
-		</div>
-    <div class="form-group row">
-      <div class="col-2">
-        <div class="form-check-inline">
-          <span class="required">*</span>&nbsp; 
-          <label for="inn" class="mr-sm-2">ИНН:</label>
-        </div>
-      </div>
-      <div class="col-2">
-        {{ counterparty_form.inn }}
-        <div class="invalid-feedback"{% if counterparty_form.inn.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-          Введите ИНН.
-        </div>  
-      </div>
-
-      <div class="col-1">
-        <div class="form-check-inline">
-          <span class="required">*</span>&nbsp; 
-          <label for="kpp" class="mr-sm-2">КПП:</label>
-        </div>
-      </div>
-      <div class="col-2">
-        {{ counterparty_form.kpp }}
-        <div class="invalid-feedback"{% if counterparty_form.kpp.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-          Введите КПП.
-        </div>  
-      </div>
-
-      <div class="col-1">
-        <div class="form-check-inline">
-          <span class="required">*</span>&nbsp; 
-          <label for="code_okpo" class="mr-sm-2">ОКПО:</label>
-        </div>
-      </div>
-      <div class="col-2">
-        {{ counterparty_form.code_okpo }}
-        <div class="invalid-feedback"{% if counterparty_form.code_okpo.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-          Введите код по ОКПО.
-        </div>  
-      </div>
-    </div>
-		<div class="form-check-inline">
-			<label class="form-check-label">
-        {{ counterparty_form.is_security_document }}
-				Д-ты по фин. безопасности
-			</label>
-		</div>
-		<div class="form-check-inline">
-			<label class="form-check-label">
-				{{ counterparty_form.is_physical_face }}
-        Физ. Лицо
-			</label>
-		</div>
-		<div class="form-check-inline">
-			<label class="form-check-label">
-				{{ counterparty_form.is_non_resident }}
-        Нерезидент
-			</label>
-		</div>
-		<div class="form-check-inline">
-			<label class="form-check-label">
-				{{ counterparty_form.is_supplier }}
-        Поставщик
-			</label>
-		</div>
-		<div class="form-check-inline">
-			<label class="form-check-label">
-				{{ counterparty_form.is_buyer }}
-        Покупатель
-			</label>
-		</div>
-	</div>
-
-	<div class="alert alert-border-gray">
-  	<p><strong>Банковские реквизиты</strong></p>
-    <div class="form-group row">
-      <div class="col-2">
-        <div class="form-check-inline">
-          <span class="required">*</span>&nbsp;
-          <label for="bik" class="mr-sm-2">БИК:</label>
-        </div>
-      </div>
-      <div class="col-4">
-        {{ bankdetails_form.bik }}
-        <div class="invalid-feedback"{% if bankdetails_form.bik.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-          Выберите БИК.
-        </div>
-      </div>
-    </div>
-    <div class="form-group row">
-      <div class="col-2">
-        <label for="bank_name" class="mr-sm-2">Наименование банка:</label>
-      </div>
-      <div class="col-4">
-        {{ bankdetails_form.bank_name }}
-        <div class="invalid-feedback"{% if bankdetails_form.bank_name.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-          Выберите наименование банка.
-        </div>
-      </div>
-    </div>
-    <div class="form-group row">
-      <div class="col-2">
-        <div class="form-check-inline">
-          <span class="required">*</span>&nbsp;
-          <label for="correspondent_account" class="mr-sm-2">Корр. Счет:</label>
-        </div>
-      </div>
-      <div class="col-4">
-        {{ bankdetails_form.correspondent_account }}
-        <div class="invalid-feedback"{% if bankdetails_form.correspondent_account.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-          Выберите корр. счет.
-        </div>
-      </div>
-    </div>
-    <div class="form-group row">
-      <div class="col-2">
-        <div class="form-check-inline">
-          <span class="required">*</span>&nbsp;
-          <label for="checking_account" class="mr-sm-2">Расчетный cчет:</label>
-        </div>
-      </div>
-      <div class="col-4">
-        {{ bankdetails_form.checking_account }}
-        <div class="invalid-feedback"{% if bankdetails_form.checking_account.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-          Выберите расчетный cчет.
-        </div>
-      </div>
-    </div>
-    <div class="form-group row">
-      <div class="col-2">
-        <div class="form-check-inline">
-          <span class="required">*</span>&nbsp;
-          <label for="account_type" class="mr-sm-2">Вид счета:</label>
-        </div>
-      </div>
-      <div class="col-4">
-        {{ bankdetails_form.account_type }}
-        <div class="invalid-feedback"{% if bankdetails_form.account_type.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-          Выберите вид cчета.
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="form-check-inline">
-          <span class="required">*</span>&nbsp;
-          <label for="currency" class="mr-sm-2">Валюта счета:</label>
-        </div>
-      </div>
-      <div class="col-2">
-        {{ bankdetails_form.currency }}
-        <div class="invalid-feedback"{% if bankdetails_form.currency.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-          Выберите валюту.
-        </div>
-      </div>
-    </div>
-	</div>
+  {% include 'Identification_data.html' %}
+  {% include 'contacts.html' %}
+  {% include 'bank_details.html' %}
 </form>
 <script type="text/javascript">
+function ReplaceName(old_str, new_str)
+{
+  var regex = /"(.*?)"/g;
+  var str =  old_str.match(regex);
+  return old_str.replace(str, '"' + new_str + '"');
+}
+
 $(document).ready(function () {
-    var is_btn_save = $('input[name=is_btn_save]').val();
-  
-    if(is_btn_save==1){
-        $('form').find('input,select').each(function() {
-            if($(this).prop('required')){
-                if($(this).val() == ''){
-                    $(this).addClass('is-invalid');
-                }
-            }
-        });
-    }
+  var is_btn_save = $('input[name=is_btn_save]').val();
+  var name = $('#id_counterparty-name').val();
+
+  if(is_btn_save==1){
+    $('form').find('input,select').each(function() {
+      if($(this).prop('required')){
+        if($(this).val() == ''){
+            $(this).addClass('is-invalid');
+        }
+      }
+    });
+  }
+
   $('form').find('input,select').change(function(){
     if($(this).prop('required')){
       if($(this).val()){
@@ -264,6 +38,40 @@ $(document).ready(function () {
         $(this).next().show();
         $(this).addClass('is-invalid');
       }
+    }
+  });
+
+  $('#id_counterparty-name').keyup( function() {
+    var short_name = $('#id_counterparty-short_name').val();
+    var full_name = $('#id_counterparty-full_name').val();
+
+    if(short_name){
+      var new_short_name = ReplaceName(short_name, $(this).val());
+      var new_full_name = ReplaceName(full_name, $(this).val());
+      $('#id_counterparty-short_name').val(new_short_name);
+      $('#id_counterparty-full_name').val(new_full_name);
+    }
+  });
+
+  $('#id_counterparty-opf').change(function(){
+    var opf_id = $(this).val();
+    if(opf_id != ''){
+      var csrf_token = $('input[name=csrfmiddlewaretoken]').val();
+      var name = $('#id_counterparty-name').val();
+
+      $.post( "{% url 'counterparty:json_opfs' %}", { 'csrfmiddlewaretoken': csrf_token, 'opf_id': opf_id }, function( data ) {
+
+        if(opf_id != 1){
+          $('#id_counterparty-short_name').prop('readonly', true);
+          $('#id_counterparty-full_name').prop('readonly', true);
+        }else{
+          $('#id_counterparty-short_name').prop('readonly', false);
+          $('#id_counterparty-full_name').prop('readonly', false);
+        }
+        $('#id_counterparty-short_name').val(data.name + ' "' + name +'"');
+        $('#id_counterparty-full_name').val(data.full_name + ' "' + name +'"');
+
+      }, "json");
     }
   });
 });

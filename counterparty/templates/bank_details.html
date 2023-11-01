@@ -1,0 +1,82 @@
+<div class="alert alert-border-gray">
+    <p><strong>Банковские реквизиты</strong></p>
+    <div class="form-group row">
+      <div class="col-2">
+        <div class="form-check-inline">
+          <span class="required">*</span>&nbsp;
+          <label for="bik" class="mr-sm-2">БИК:</label>
+        </div>
+      </div>
+      <div class="col-4">
+        {{ bankdetails_form.bik }}
+        <div class="invalid-feedback"{% if bankdetails_form.bik.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
+          Выберите БИК.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-2">
+        <label for="bank_name" class="mr-sm-2">Наименование банка:</label>
+      </div>
+      <div class="col-4">
+        {{ bankdetails_form.bank_name }}
+        <div class="invalid-feedback"{% if bankdetails_form.bank_name.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
+          Выберите наименование банка.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-2">
+        <div class="form-check-inline">
+          <span class="required">*</span>&nbsp;
+          <label for="correspondent_account" class="mr-sm-2">Корр. Счет:</label>
+        </div>
+      </div>
+      <div class="col-4">
+        {{ bankdetails_form.correspondent_account }}
+        <div class="invalid-feedback"{% if bankdetails_form.correspondent_account.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
+          Выберите корр. счет.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-2">
+        <div class="form-check-inline">
+          <span class="required">*</span>&nbsp;
+          <label for="checking_account" class="mr-sm-2">Расчетный cчет:</label>
+        </div>
+      </div>
+      <div class="col-4">
+        {{ bankdetails_form.checking_account }}
+        <div class="invalid-feedback"{% if bankdetails_form.checking_account.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
+          Выберите расчетный cчет.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-2">
+        <div class="form-check-inline">
+          <span class="required">*</span>&nbsp;
+          <label for="account_type" class="mr-sm-2">Вид счета:</label>
+        </div>
+      </div>
+      <div class="col-4">
+        {{ bankdetails_form.account_type }}
+        <div class="invalid-feedback"{% if bankdetails_form.account_type.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
+          Выберите вид cчета.
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="form-check-inline">
+          <span class="required">*</span>&nbsp;
+          <label for="currency" class="mr-sm-2">Валюта счета:</label>
+        </div>
+      </div>
+      <div class="col-2">
+        {{ bankdetails_form.currency }}
+        <div class="invalid-feedback"{% if bankdetails_form.currency.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
+          Выберите валюту.
+        </div>
+      </div>
+    </div>
+  </div>
