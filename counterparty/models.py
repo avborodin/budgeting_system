@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from currency.models import Currency 
+from phonenumber_field.modelfields import PhoneNumberField
 
 class Group(models.Model):
 	name = models.CharField(max_length=128)
@@ -105,6 +106,12 @@ class SignatoryContract(models.Model):
 	post_i = models.CharField(max_length=128, verbose_name='Должность в именительном падеже')
 	post_r = models.CharField(max_length=128, verbose_name='Должность в родительном падеже')
 	document = models.CharField(max_length=128, verbose_name='Документ - основание в родительном падеже')
+    adress_legal = models.CharField(max_length=128, verbose_name='Юридический адрес')
+    adress_factual = models.CharField(max_length=128, verbose_name='Фактический адрес')
+    phone_number = PhoneNumberField(blank=True)
 
-#class ContactFaces(models.Model):
-	
+class ContactFaces(models.Model):
+	fio = models.CharField(max_length=128, verbose_name='ФИО')
+    post = models.CharField(max_length=128, verbose_name='Должность')
+    adress = models.CharField(max_length=128, verbose_name='Адрес')
+

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'counterparty.apps.CounterpartyConfig',
     'currency',
     'django_crontab',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
