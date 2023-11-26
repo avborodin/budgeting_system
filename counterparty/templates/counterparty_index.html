@@ -1,0 +1,193 @@
+{% extends 'backend/base.html' %}
+
+{% block create_new %}
+  <!--<div class="container-fluid p-2 bg-secondary text-white">
+    <i class="material-icons openModal" title="Создвть новый контрагент" data-link="/counterparty/form_create" style="cursor:pointer;color:#fdf001">&#xe146;</i>
+  </div>-->
+{% endblock %}
+
+{% block search %}
+
+{% endblock %}
+
+{% block content %}
+
+{% csrf_token %}
+
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-12">
+        <h1>Контрагенты</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="card card-default">
+      <form method="get">
+        <div class="alert alert-border-gray">
+          <div class="row">
+            <div class="col-sm-9">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Наименование:</label>
+                     <input type="text" class="form-control" placeholder="Наименование" value="{{request.GET.name}}" name="name">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="search-inn">ИНН:</label>
+                    <input type="text" class="form-control" placeholder="ИНН" value="{{request.GET.inn}}" name="inn">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Группа:</label>
+                    <select class="form-control" name="group">
+                      <option value="">---------</option>
+                      {% for group in groups %}
+                        <option value="{{ group.id }}" {% if group.id|slugify == request.GET.group %}selected="selected"{% endif %}>{{ group.name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="search-kpp">КПП:</label>
+                    <input type="text" class="form-control" placeholder="КПП" value="{{request.GET.kpp}}" name="kpp">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="search-kpp">Статус:</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox">
+                  <label class="form-check-label">В разработке</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox">
+                  <label class="form-check-label">На рассмотрении рук. ПД</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox">
+                  <label class="form-check-label">На рассмотрении юриста</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox">
+                  <label class="form-check-label">На проверке реквизитов</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox">
+                  <label class="form-check-label">Требует регистрация контрагента</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox">
+                  <label class="form-check-label">Зарегистрирован</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox">
+                  <label class="form-check-label">Отменен</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox">
+                  <label class="form-check-label">Заблокирован</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <div class="dt-buttons btn-group flex-wrap">
+                <button type="submit" class="btn btn-warning">Поиск</button>
+                <button type="button" class="btn btn-secondary" onclick="location.href='{% url 'counterparty:index'%}'">Отмена</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <div class="dt-buttons btn-group flex-wrap">
+                <button class="btn btn-warning buttons-copy buttons-html5 openModal" tabindex="0" aria-controls="example1" data-link="{% url 'counterparty:form-create' %}" title="Создвть новый контрагент" type="button"><span>Создать новый</span></button>
+                <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>CSV</span></button>
+                <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>Excel</span></button>
+                <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>PDF</span></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover text-nowrap">
+              <thead class="thead-yellow">
+                <tr>
+                  <th>...</th>
+                  <th>№</th>
+                  <th>Куратор</th>
+                  <th>Сокрашенное наименование</th>
+                  <th>Группа</th>
+                  <th>ИНН</th>
+                  <th>КПП</th>
+                  <th>Статус</th>
+                </tr>
+              </thead>
+              <tbody class="tbody-white">
+              {% if counterparties %}
+                {% for counterparty in counterparties %}
+                <tr>
+                  <td>
+                    <i class="fas fa-edit openModal"  title="Редактировать" style="color:green;cursor:pointer;" data-link="{% url 'counterparty:form-edit' counterparty.id %}"></i>
+                    <i class="far fa-trash-alt Delete" title="Удалить" style="color:red;cursor:pointer;" data-link="{% url 'counterparty:delete' counterparty.id %}">&#xe872;</i>
+                  </td>
+                  <td>{{ counterparty.id }}</td>
+                  <td>{{ counterparty.user.last_name }} {{ counterparty.user.first_name }}</td>
+                  <td><a href="javascript:void(0);" class="openModal" data-link="{% url 'counterparty:form-edit' counterparty.id %}">{{ counterparty.short_name }}</a></td>
+                  <td>{{ counterparty.group.name }}</td>
+                  <td>{{ counterparty.inn }}</td>
+                  <td>{{ counterparty.kpp }}</td>
+                  <td></td>
+                </tr>
+                {% endfor %}
+              {% endif %}
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer clearfix">
+            <div class="pagination pagination-sm m-0">
+              <span class="step-links">
+                  {% if page_obj.has_previous %}
+                      <a href="?page=1">&laquo; Первая</a>
+                      <a href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                  {% endif %}
+
+                  <span class="current">
+                      Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+                  </span>
+
+                  {% if page_obj.has_next %}
+                      <a href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                      <a href="?page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a>
+                  {% endif %}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% include 'modal.html' %}
+
+{% endblock %}

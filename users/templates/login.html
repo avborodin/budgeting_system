@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="login-box">
+  <div class="card">
+    {% if form.errors %}
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close auto" data-dismiss="alert" aria-hidden="true">×</button>
+        <h5>
+          <i class="icon fas fa-ban"></i>
+        </h5>
+        {% for key, value in form.errors.items %}
+            {{ value }}
+        {% endfor %}
+      </div>
+    {% endif %}
+    <div class="card-body login-card-body">
+      <form method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+          {{ form.username }}
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user-tie"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          {{ form.password }}
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="icheck-primary">
+              {{ form.remember_me }}
+              <label for="remember">
+                Запомнить меня
+              </label>
+            </div>
+          </div>
+          <div class="col-6">
+            <button type="submit" class="btn btn-dark btn-block">Вход в ситсему</button>
+          </div>
+        </div>
+      </form>
+      <p class="mb-1">
+        <a href="{% url 'password-reset' %}">Забыл пароль?</a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

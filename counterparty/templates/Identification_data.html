@@ -1,127 +1,135 @@
-<div class="alert alert-border-gray">
+
+<div class="alert border">
   <p><strong>Идентификационные данные</strong></p>
-  <div class="form-group row">
-    <div class="col-2">
-      <label for="email" class="mr-sm-2">№ контрагента:</label>
-    </div>
-    <div class="col-2">
-      <input type="text" readonly class="form-control mr-sm-2" id="id" value="{{ counterparty_id }}">
-    </div>
-    <div class="col-1">
-      <label for="1c" class="mr-sm-2">№ 1С:</label>
-    </div>
-    <div class="col-2">
-      <input type="text" readonly class="form-control mr-sm-2" id="1c">
-    </div>
-    <div class="col-1">
-      <div class="form-check-inline">
-        <span class="required">*</span>&nbsp;
-        <label for="group" class="mr-sm-2">Группа:</label>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group row">
+        <label for="email" class="col-sm-6 col-form-label">№ контрагента:</label>
+        <div class="col-sm-6">
+          <input type="text" readonly class="form-control" id="id" value="{{ counterparty_id }}">
+        </div>
       </div>
     </div>
-    <div class="col-4">
-      {{ counterparty_form.group }}
-      <div class="invalid-feedback"{% if counterparty_form.group.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-        Выберите группу.
+    <div class="col-sm-3">
+      <div class="form-group row">
+        <label for="1c" class="col-sm-4 col-form-label">№ 1С:</label>
+        <div class="col-sm-8">
+          <input type="text" readonly class="form-control" id="1c">
+        </div>
       </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-2">
-      <div class="form-check-inline">
-        <span class="required">*</span>&nbsp;
-        <label for="name" class="mr-sm-2">Наименование:</label>
-      </div>
-    </div>
-    <div class="col-7">
-      {{ counterparty_form.name }}
-      <div class="invalid-feedback"{% if counterparty_form.name.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-        Введите наименование.
-      </div>
-    </div>
-    <div class="col-1">
-      <div class="form-check-inline">
-        <span class="required">*</span>&nbsp;
-        <label for="opf" class="mr-sm-2">ОПФ:</label>
-      </div>
-    </div>
-    <div class="col-2">
-      {{ counterparty_form.opf }}
-      <div class="invalid-feedback"{% if counterparty_form.opf.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-        Выберите ОПФ.
+    <div class="col-sm-5">
+      <div class="form-group row">
+        <label for="group" class="col-sm-3 col-form-label"><span class="required">*</span>&nbsp;Группа:</label>
+        <div class="col-sm-9">
+          {{ counterparty_form.group }}
+          <div class="invalid-feedback"{% if counterparty_form.group.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
+            Выберите группу.
+          </div>
+         </div>
       </div>
     </div>
   </div>
-  <div class="form-group row">
-    <div class="col-2">
-      <div class="form-check-inline">
-        <span class="required">*</span>&nbsp;
-        <label for="short_name" class="mr-sm-2">Сокр. наименование:</label>
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="form-group row">
+        <label for="name" class="col-sm-3 col-form-label"><span class="required">*</span>&nbsp;Наименование:</label>
+        <div class="col-sm-9">
+          {{ counterparty_form.name }}
+          <div class="invalid-feedback"{% if counterparty_form.name.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
+            Введите наименование.
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-10">
-      {{ counterparty_form.short_name }}
-      <div class="invalid-feedback"{% if counterparty_form.short_name.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-        Введите сокрашенное наименование.
+    <div class="col-sm-4">
+      <div class="form-group row">
+        <label for="opf" class="col-sm-3 col-form-label"><span class="required">*</span>&nbsp;ОПФ:</label>
+        <div class="col-sm-9">
+          {{ counterparty_form.opf }}
+          <div class="invalid-feedback"{% if counterparty_form.opf.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
+            Выберите ОПФ.
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="form-group row">
-    <div class="col-2">
-      <div class="form-check-inline">
-        <span class="required">*</span>&nbsp;
-        <label for="full_name" class="mr-sm-2">
-          Полн. наименование:
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group row">
+        <label for="short_name" class="col-sm-2 col-form-label">
+          <span class="required">*</span>&nbsp;Сокр. наименование:
         </label>
-      </div>
-    </div>
-    <div class="col-10">
-      {{ counterparty_form.full_name }}
-      <div class="invalid-feedback"{% if counterparty_form.full_name.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-        Введите полное наименование.
-      </div>
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-2">
-      <div class="form-check-inline">
-        <span class="required">*</span>&nbsp;
-        <label for="inn" class="mr-sm-2">ИНН:</label>
-      </div>
-    </div>
-    <div class="col-2">
-      {{ counterparty_form.inn }}
-      <div class="invalid-feedback"{% if counterparty_form.inn.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-        Введите ИНН.
-      </div>
-    </div>
-
-    <div class="col-1">
-      <div class="form-check-inline">
-        <span class="required">*</span>&nbsp;
-        <label for="kpp" class="mr-sm-2">КПП:</label>
-      </div>
-    </div>
-    <div class="col-2">
-      {{ counterparty_form.kpp }}
-      <div class="invalid-feedback"{% if counterparty_form.kpp.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-        Введите КПП.
-      </div>
-    </div>
-
-    <div class="col-1">
-      <div class="form-check-inline">
-        <span class="required">*</span>&nbsp;
-        <label for="code_okpo" class="mr-sm-2">ОКПО:</label>
-      </div>
-    </div>
-    <div class="col-2">
-      {{ counterparty_form.code_okpo }}
-      <div class="invalid-feedback"{% if counterparty_form.code_okpo.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
-        Введите код по ОКПО.
+        <div class="col-sm-10">
+          {{ counterparty_form.short_name }}
+          <div class="invalid-feedback"{% if counterparty_form.short_name.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
+            Введите сокрашенное наименование.
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group row">
+        <label for="full_name" class="col-sm-2 col-form-label">
+          <span class="required">*</span>&nbsp;Полн.наименование:
+        </label>
+        <div class="col-sm-10">
+          {{ counterparty_form.full_name }}
+          <div class="invalid-feedback"{% if counterparty_form.full_name.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
+            Введите полное наименование.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group row">
+        <label for="inn" class="col-sm-4 col-form-label">
+          <span class="required">*</span>&nbsp;ИНН:
+        </label>
+        <div class="col-sm-8">
+          {{ counterparty_form.inn }}
+          <div class="invalid-feedback"{% if counterparty_form.inn.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
+            Введите ИНН.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group row">
+        <label for="kpp" class="col-sm-4 col-form-label">
+          <span class="required">*</span>&nbsp;КПП:
+        </label>
+        <div class="col-sm-8">
+          {{ counterparty_form.kpp }}
+          <div class="invalid-feedback"{% if counterparty_form.kpp.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
+            Введите КПП.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group row">
+        <label for="code_okpo" class="col-sm-4 col-form-label">
+          <span class="required">*</span>&nbsp;ОКПО:
+        </label>
+        <div class="col-sm-8">
+          {{ counterparty_form.code_okpo }}
+          <div class="invalid-feedback"{% if counterparty_form.code_okpo.errors %} style="display:block;" {% else %} style="display:none;" {% endif %}>
+            Введите код по ОКПО.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <div class="form-check-inline">
     <label class="form-check-label">
       {{ counterparty_form.is_security_document }}
@@ -153,3 +161,4 @@
     </label>
   </div>
 </div>
+
