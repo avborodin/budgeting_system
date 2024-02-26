@@ -16,7 +16,7 @@
     
     "host": "192.168.47.128",
     "user": "borodin",
-    "password": "DezbnhTr",
+    "password": "",
     "port": "22",
     
     "remote_path": "/data/vhosts/python/budgeting_system/",
